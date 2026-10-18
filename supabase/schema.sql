@@ -18,6 +18,7 @@ create table if not exists public.quiz_players (
  joined_at timestamptz not null default now(),
  primary key(room_id,player_id)
 );
+alter table public.quiz_rooms add column if not exists game_state jsonb not null default '{}'::jsonb;
 alter table public.quiz_rooms enable row level security;
 alter table public.quiz_players enable row level security;
 drop policy if exists "rooms readable by clients" on public.quiz_rooms;
