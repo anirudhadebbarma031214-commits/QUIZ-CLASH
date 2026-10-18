@@ -21,6 +21,8 @@ create table if not exists public.quiz_players (
 alter table public.quiz_rooms add column if not exists game_state jsonb not null default '{}'::jsonb;
 alter table public.quiz_rooms enable row level security;
 alter table public.quiz_players enable row level security;
+grant select, insert, update on public.quiz_rooms to anon, authenticated;
+grant select, insert, update on public.quiz_players to anon, authenticated;
 drop policy if exists "rooms readable by clients" on public.quiz_rooms;
 create policy "rooms readable by clients" on public.quiz_rooms for select to anon, authenticated using(true);
 drop policy if exists "anyone can create a room" on public.quiz_rooms;
